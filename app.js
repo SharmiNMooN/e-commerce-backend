@@ -1,8 +1,18 @@
 const express = require("express");
+const userRoute = require("./modules/users/user.route")
+const {connectDB} = require("./config/db.js");
 
 const app = express();
 
 const port = 4000;
+
+
+connectDB().then(()=>{
+    console.log("Database is connected");
+}).catch((err)=>{
+    console.log(err);
+})
+
 
 app.use(express.json());
 
@@ -15,7 +25,7 @@ app.get("/",(req,res)=>{
 
 });
 
-
+app.use("/",userRoute);
 
 
 
