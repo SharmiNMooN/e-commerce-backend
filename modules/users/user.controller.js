@@ -58,8 +58,7 @@ module.exports = {
             lastName: user.lastName,
             phoneNumber: user.phoneNumber,
             status: user.status
-
-        },
+        };
         const token = await jwt.sign(tokenPayload);
         return res.status(200).send({
             success: true,
