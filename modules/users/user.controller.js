@@ -1,5 +1,6 @@
 const userHelper = require("./user.helper");
 const userService = require("./user.service");
+const jwt = require("../common/jwt.js");
 
 module.exports = {
 
@@ -20,6 +21,59 @@ module.exports = {
             message: "User registered succesfully",
             data: result
         });
+
+   },
+   loginUser: async(req,res)=>{
+       const payload = req.body;
+       if(!payload.phoneNumber || !payload.password){
+
+        return res.status(400).send({
+            success: false,
+            message: "validation error: phoneNumber and password are required"
+        });
+       }
+       const user = await userService.findUser({
+           phoneNumber: payload.phoneNumber
+
+       });
+       if(!user){
+           return res.status(400).send({
+               success: false,
+               message: "user is not registerd"
+
+           });
+       } 
+        const matched = await userHelper.comparePassword(payload.password,user.password);
+        if(!matched){
+
+            return res.status(401).send({
+                success:false,
+                message: "password doesnt matched"
+
+            });
+        }
+        const tokenPayload = {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phoneNumber: user.phoneNumber,
+            status: user.status
+
+        },
+        const token = await jwt.sign(tokenPayload);
+        return res.status(200).send({
+            success: true,
+            message: "You are successfully logged in",
+            date: {
+                accessToken: token,
+            }
+        });
+
+
+
+
+
+
 
    }
 }
