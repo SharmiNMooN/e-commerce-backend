@@ -16,5 +16,8 @@ const userSchema = new Schema({
     },    
     password: { type: Schema.Types.String, trim: true, required: true},
 
+}, {
+    timestamps: true
 });
- module.exports = mongoose.model("user",userSchema);
+ module.exports = mongoose.model("users",userSchema);
+ 
