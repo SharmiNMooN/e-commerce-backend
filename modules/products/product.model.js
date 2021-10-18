@@ -13,7 +13,7 @@ const productSchema = new Schema({
 
     title: {type: Schema.Types.String, trim: true, required: true},
     slug: {type: Schema.Types.String, lowercase: true, trim: true, unique: true},
-    description: {type: Schema.Types.String, trim,},
+    description: {type: Schema.Types.String, trim: true},
     quantity: {type: Schema.Types.Number, default: 0},
     price: {type: Schema.Types.Number, required: true, min: 1},
     isDiscount: {type: Schema.Types.Boolean, default: false},

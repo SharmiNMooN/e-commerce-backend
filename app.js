@@ -1,6 +1,8 @@
 const express = require("express");
-const userRoute = require("./modules/users/user.route")
+const userRoute = require("./modules/users/user.route");
+const productRoute = require("./modules/products/product.route");
 const {connectDB} = require("./config/db.js");
+
 
 const app = express();
 
@@ -25,8 +27,8 @@ app.get("/",(req,res)=>{
 
 });
 
-app.use("/",userRoute);
-
+app.use("/", userRoute);
+app.use("/", productRoute);
 
 
 

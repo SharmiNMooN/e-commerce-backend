@@ -2,7 +2,7 @@ const slugify = require("slugify");
 const productService = require("./product.service");
 
 module.exports = {
-    createProduct: (req,res)=>{
+    createProduct: async (req,res)=>{
         const payload = req.body;
         if(!payload.title || !payload.price){
             return res.status(400).send({
