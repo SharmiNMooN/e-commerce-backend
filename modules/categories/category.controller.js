@@ -20,9 +20,16 @@ module.exports = {
             });
 
 
-
-
         },
+
+        getCategories: async (req, res) =>{
+            const categories = await categoryService.getCategories();
+            return res.status(200).send({
+                success: true,
+                message: "categories fetched successfully",
+                data: categories
+            });
+        }
 
 
 

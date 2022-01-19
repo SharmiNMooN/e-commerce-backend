@@ -8,5 +8,13 @@ module.exports = {
 
         return await categoryModel.create(payload);
 
-    }
+    },
+
+    getCategories: async ()=>{
+
+        return await categoryModel.find({}).populate("parentId");
+
+    }   
+
 }
+
