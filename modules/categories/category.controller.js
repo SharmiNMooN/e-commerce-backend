@@ -1,4 +1,5 @@
 const slugify = require("slugify");
+const { postCategories } = require("./category.service");
 const categoryService = require("./category.service");
 
 module.exports = {
@@ -29,10 +30,35 @@ module.exports = {
                 message: "categories fetched successfully",
                 data: categories
             });
+        },
+    
+    updateCategory: async (req, res) =>{
+        const payload = req.body;
+        const id = req.params.id;
+        const updatePayload = {};
+        if(payload.title){
+            updatePayload.title = payload.title;
         }
-
-
-
-
-
+        if(payload.description){
+            updatePayload.description = payload.description;
+        }
+        if(payload.status){
+            updatePayload.status = payload.status;
+        }
+        if(payload.parentId){
+            updatePayload.parentId = payload.parentId;
+        }
+        const category = await categoryService.updateCategory(id, updatePayload);
+        return res.status(200).send({
+            success: true,
+            message: "category updated successfully",
+            data: category
+        });
+        
+    
+    },
 }
+
+        
+
+            
