@@ -66,11 +66,18 @@ module.exports = {
             message: "Single category fatch successfully",
             data: category
 
-        })
+        });
 
+    },
 
-
-
+    deleteCategory: async(req,res)=>{
+        const categoryId = req.params.id;
+        const category = await categoryService.deleteCategory(categoryId);
+        return res.status(200).send({
+            success: true,
+            message: "Category deleted",
+    
+        });
 
     }
 

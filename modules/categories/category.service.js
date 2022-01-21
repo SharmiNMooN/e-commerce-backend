@@ -1,3 +1,4 @@
+const { deleteCategory } = require("./category.controller");
 const categoryModel = require("./category.model");
 
 
@@ -23,5 +24,11 @@ module.exports = {
     getCategory: async(categoryId)=>{
 
         return await categoryModel.findOne({_id:categoryId}).populate("parentId");
+    },
+
+    deleteCategory: async(categoryId)=>{
+
+        return await categoryModel.findOneAndRemove({_id:categoryId})
+
     }
 }
