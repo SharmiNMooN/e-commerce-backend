@@ -18,5 +18,10 @@ module.exports = {
     updateCategory: async (id, payload)=>{
             
         return await categoryModel.findByIdAndUpdate(id, payload, {new: true});
+    },
+
+    getCategory: async(categoryId)=>{
+
+        return await categoryModel.findOne({_id:categoryId}).populate("parentId");
     }
 }

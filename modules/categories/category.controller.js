@@ -57,6 +57,24 @@ module.exports = {
         
     
     },
+
+    getCategory: async(req, res)=>{
+        const categoryId = req.params.id;
+        const category = await categoryService.getCategory(categoryId);
+        return res.status(200).send({
+            success: true,
+            message: "Single category fatch successfully",
+            data: category
+
+        })
+
+
+
+
+
+    }
+
+    
 }
 
         
