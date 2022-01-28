@@ -4,5 +4,8 @@ module.exports = {
 
         return await productModel.create(payload);
 
-    }
+    },
+    getProducts: async()=>{
+        return await productModel.find({}).populate("parentId");
+    },
 }
