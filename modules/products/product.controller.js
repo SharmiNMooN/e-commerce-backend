@@ -42,7 +42,7 @@ module.exports = {
         const products = await productService.getProducts();
         return res.status(200).send({
             success: true,
-            message: "product fetched successfully",
+            message: "products fetched successfully",
             data: products
         },);
 
@@ -59,6 +59,16 @@ module.exports = {
 
       })
 
+    },
+    getProduct: async(req,res)=>{
+        const productId = req.params.id;
+        const product = await productService.getProduct(productId);
+        return res.status(200).send({
+            success: true,
+            message: "Product fatched successfully",
+            data: product
+
+        })
     }
 
 }

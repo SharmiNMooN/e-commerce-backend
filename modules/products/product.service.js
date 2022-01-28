@@ -12,5 +12,10 @@ module.exports = {
     updateProduct: async(payload,id)=>{
         return await productModel.findOneAndUpdate({_id:id},payload,{new:true});
 
+    },
+
+    getProduct: async(productId)=>{
+        return await productModel.findOne({_id:productId});
+
     }
 }
