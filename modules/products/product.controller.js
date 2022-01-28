@@ -44,11 +44,21 @@ module.exports = {
             success: true,
             message: "product fetched successfully",
             data: products
-        });
-
-
+        },);
 
     },
 
+    upadteProduct: async(req,res)=>{
+      const productId = req.params.id;
+      const payload = req.body;
+      const updatedProduct = await productService.updateProduct(payload,productId);
+      return res.status(200).send({
+          success: true,
+          message: "Product updated successfully",
+          data: updatedProduct
+
+      })
+
+    }
 
 }

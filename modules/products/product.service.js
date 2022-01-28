@@ -8,4 +8,9 @@ module.exports = {
     getProducts: async()=>{
         return await productModel.find({});
     },
+
+    updateProduct: async(payload,id)=>{
+        return await productModel.findOneAndUpdate({_id:id},payload,{new:true});
+
+    }
 }
