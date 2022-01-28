@@ -38,13 +38,12 @@ module.exports = {
          });
     },
 
-    getProduct: async(req,res)=>{
-        const id = req.params.id;
-        const product = await productService.getProduct(id);
+    getProducts: async(req,res)=>{
+        const products = await productService.getProducts();
         return res.status(200).send({
             success: true,
             message: "product fetched successfully",
-            data: product
+            data: products
         });
 
 

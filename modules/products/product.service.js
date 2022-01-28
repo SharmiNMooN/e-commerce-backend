@@ -6,6 +6,6 @@ module.exports = {
 
     },
     getProducts: async()=>{
-        return await productModel.find({}).populate("parentId");
+        return await productModel.find({});
     },
 }
