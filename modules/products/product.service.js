@@ -17,5 +17,9 @@ module.exports = {
     getProduct: async(productId)=>{
         return await productModel.findOne({_id:productId});
 
+    },
+
+    removeProduct: async(productId)=>{
+        return await productModel.findOneAndRemove({_id:productId});
     }
 }

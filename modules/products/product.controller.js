@@ -69,6 +69,25 @@ module.exports = {
             data: product
 
         })
+    },
+    removeProduct: async(req,res)=>{
+        const productId = req.params.id;
+        const productDetails = await productService.getProduct(productId);
+        if(!productDetails){
+            return res.status(400).send({
+                success:false,
+                message: "Product is not found"
+            });
+        }
+        await productService.removeProduct(productId);
+        return res.status(200).send({
+            success: true,
+            message: "Product delete successfully",
+        
+        });
+         
+        
     }
+
 
 }
