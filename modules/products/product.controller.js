@@ -39,7 +39,16 @@ module.exports = {
     },
 
     getProducts: async(req,res)=>{
-        const products = await productService.getProducts();
+        const categoryId = req.query.categoryId;
+        const subCategoryId = req.query.subCategoryId;
+        const filter = {};
+        if(categoryId){
+            filter.categoryId = categoryId;
+        }
+        if(subCategoryId){
+            filter.subCategoryId = subCategoryId;
+        }
+        const products = await productService.getProducts(filter);
         return res.status(200).send({
             success: true,
             message: "products fetched successfully",
@@ -85,9 +94,8 @@ module.exports = {
             message: "Product delete successfully",
         
         });
-         
+        
         
     }
-
 
 }

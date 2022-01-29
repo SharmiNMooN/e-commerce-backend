@@ -5,8 +5,8 @@ module.exports = {
         return await productModel.create(payload);
 
     },
-    getProducts: async()=>{
-        return await productModel.find({});
+    getProducts: async(filter)=>{
+        return await productModel.find(filter);
     },
 
     updateProduct: async(payload,id)=>{
