@@ -28,7 +28,7 @@ module.exports = {
 
     deleteCategory: async(categoryId)=>{
 
-        return await categoryModel.findOneAndRemove({_id:categoryId})
+        return await categoryModel.findOneAndRemove({_id:categoryId});
 
     }
 }

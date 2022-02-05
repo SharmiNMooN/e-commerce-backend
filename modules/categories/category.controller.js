@@ -1,5 +1,4 @@
 const slugify = require("slugify");
-const { postCategories } = require("./category.service");
 const categoryService = require("./category.service");
 
 module.exports = {
