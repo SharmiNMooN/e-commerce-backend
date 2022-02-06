@@ -15,6 +15,15 @@ module.exports = {
                message: "validation error: firstName, lastName, phoneNumber, password are required "
            });
         }
+        //find out user using phone number in databse
+        const user = await userService.findUser({phoneNumber: payload.phoneNumber});
+        //if find user from databse then  throw a bad req user already regiserd phone number then
+        if(user){
+            return res.status(409).send({
+                success: false,
+                message: "user already registerd"
+            });
+        }
         payload.password = await authService.passwordEncrypt(payload.password);
         const result = await userService.createUser(payload);
         return res.status(201).send({
