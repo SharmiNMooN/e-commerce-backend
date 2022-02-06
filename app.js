@@ -34,6 +34,17 @@ app.use("/", productRoute);
 app.use("/", categoryRoute);
 
 
+app.use(function(err,req,res,next){
+    if(err){
+        console.error(err);
+        return res.status(500).send({
+            success: false,
+            message: "internal server error"
+        })
+    }
+});
+
+
 
 
 app.listen(port, ()=>{
