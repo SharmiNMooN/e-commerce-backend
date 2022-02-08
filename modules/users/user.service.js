@@ -13,7 +13,11 @@ module.exports = {
         return user;
 
 
-    }
+    },
+     getAllUser: async()=>{
+        const users = await userModel.find({},{password: 0});
+        return users;
+     }
 
 
 }
