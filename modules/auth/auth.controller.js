@@ -6,32 +6,40 @@ const jwt = require("../common/jwt.js");
 module.exports = {
 
     registerUser: async(req,res)=>{
-        const payload = req.body;
+      
+        try {
+            const payload = req.body;
    
-        if(!payload.firstName || !payload.lastName || !payload.phoneNumber || !payload.password){
-   
-           return res.status(400).send({
-               success: false,
-               message: "validation error: firstName, lastName, phoneNumber, password are required "
-           });
-        }
-        //find out user using phone number in databse
-        const user = await userService.findUser({phoneNumber: payload.phoneNumber});
-        //if find user from databse then  throw a bad req user already regiserd phone number then
-        if(user){
-            return res.status(409).send({
+            if(!payload.firstName || !payload.lastName || !payload.phoneNumber || !payload.password){
+       
+               return res.status(400).send({
+                   success: false,
+                   message: "validation error: firstName, lastName, phoneNumber, password are required "
+               });
+            }
+            //find out user using phone number in databse
+            const user = await userService.findUser({phoneNumber: payload.phoneNumber});
+            //if find user from databse then  throw a bad req user already regiserd phone number then
+            if(user){
+                return res.status(409).send({
+                    success: false,
+                    message: "user already registerd"
+                });
+            }
+            payload.password = await authService.passwordEncrypt(payload.password);
+            const result = await userService.createUser(payload);
+            return res.status(201).send({
+                success: true,
+                message: "User registered succesfully",
+                data: result
+            });
+    
+        } catch (error) {
+            return res.status(500).send({
                 success: false,
-                message: "user already registerd"
+                message: error.message,
             });
         }
-        payload.password = await authService.passwordEncrypt(payload.password);
-        const result = await userService.createUser(payload);
-        return res.status(201).send({
-            success: true,
-            message: "User registered succesfully",
-            data: result
-        });
-
    },
    loginUser: async(req,res)=>{
        const payload = req.body;
