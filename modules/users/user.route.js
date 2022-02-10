@@ -7,6 +7,8 @@ const router = express.Router();
 router.get("/api/v1.0.0/users",userController.getAllUser);
 // api for get user details
 router.get("/api/v1.0.0/users/:id",userController.getUserDetails);
+//api for user update
+router.patch("/api/v1.0.0/users/:id",userController.updateUser);
 
 
 module.exports = router;

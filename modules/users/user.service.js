@@ -22,8 +22,12 @@ module.exports = {
          },{password: 0});
          return user;
          
+     },
+     updateUser: async(userId,payload)=>{
+         const user = await userModel.findOneAndUpdate({
+             _id: userId,
+
+         },payload,{new: true})
+         return user;
      }
-
-
-
 }
