@@ -4,6 +4,7 @@ const productRoute = require("./modules/products/product.route");
 const {connectDB} = require("./config/db.js");
 const categoryRoute = require("./modules/categories/category.route");
 const authRoute = require("./modules/auth/auth.route");
+const orderRoute = require("./modules/orders/order.route");
 
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/",authRoute);
 app.use("/", userRoute);
 app.use("/", productRoute);
 app.use("/", categoryRoute);
+app.use("/", orderRoute);
 
 
 app.use(function(err,req,res,next){

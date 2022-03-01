@@ -1,4 +1,3 @@
-const { deleteCategory } = require("./category.controller");
 const categoryModel = require("./category.model");
 
 
@@ -11,9 +10,7 @@ module.exports = {
     },
 
     getCategories: async ()=>{
-
         return await categoryModel.find({}).populate("parentId");
-
     },
 
     updateCategory: async (id, payload)=>{

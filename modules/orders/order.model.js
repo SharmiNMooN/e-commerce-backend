@@ -21,9 +21,10 @@ const orderSchema = new Schema({
     total: {type: Schema.Types.Number,required: true},
     subtotal: {type: Schema.Types.Number,required: true},
     invoiceNo: {type: Schema.Types.String, trim: true, unique: true, required: true},
-    customerId: {type: Schema.Types.Number,required: true},
+    customerId: {type: Schema.Types.String, required: true},
     customerName: {type: Schema.Types.String, trim: true, required: true},
-    customerContactNumber: {type: Schema.Types.String, trim: true, required: true},
+    customerPhoneNumber: {type: Schema.Types.String, trim: true, required: true},
+    address: {type: Schema.Types.String, trim: true, required: true},
     status: {
         type: Schema.Types.String, 
         enum: ["active", "inactive", "deleted"],
