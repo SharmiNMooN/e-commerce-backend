@@ -4,5 +4,6 @@ const router =express.Router();
 // api for place a order//
 
 router.post("/api/v1.0.0/orders", orderController.createOrder);
+router.get("/api/v1.0.0/orders", orderController.getOrders);
 
 module.exports = router;

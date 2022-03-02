@@ -31,9 +31,7 @@ module.exports = {
                 success: true,
                 message: "Order create are successfully",
                 data: order
-
             })
-
 
         } catch(error){
             return res.status(500).send({
@@ -42,10 +40,32 @@ module.exports = {
                 data: error
             });
         }
+    },
+    getOrders: async(req,res)=>{
+        try{
+            const {customerId, page = 1, limit = 20 } = req.query;
+            const skip = (page-1) * limit;
+            const orders = await orderService.getOrders({ customerId }, skip, limit);
+            return res.status(200).send({
+                success: true,
+                message: "Orders fetch are successfully",
+                data: orders
+            })
 
 
+
+        }catch(error){
+            return res.status(500).send({
+                success: false,
+                message: "Internal sever error",
+                data: error
+            });
+
+        }
     }
+
     
+
 
 
 

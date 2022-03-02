@@ -34,10 +34,16 @@ module.exports = {
             order,
             createdItems,
         }
+    },
+    getOrders: async(filter, skip = 0,limit = 20)=>{
 
+        const querySpec = {};
+        if(filter.customerId){
+            querySpec.customerId= filter.customerId;
+        }
+        const orders = await orderModel.find(querySpec).skip(Number(skip)).limit(Number(limit));
 
-
-
-    }
-
+        return orders;
+    } 
+    
 }
