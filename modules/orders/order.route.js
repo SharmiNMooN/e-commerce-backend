@@ -6,5 +6,6 @@ const router =express.Router();
 router.post("/api/v1.0.0/orders", orderController.createOrder);
 router.get("/api/v1.0.0/orders", orderController.getOrders);
 router.patch("/api/v1.0.0/orders/:id", orderController.updateOrder);
+router.get("/api/v1.0.0/orders/:id", orderController.getOrder);
 
 module.exports = router;

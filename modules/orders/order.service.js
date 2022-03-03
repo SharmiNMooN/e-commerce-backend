@@ -1,6 +1,7 @@
 const orderModel = require("./order.model");
 const orderItemModel = require("./order.item.model");
 const productModel = require("../products/product.model");
+const ObjectId = require("mongoose").Types.ObjectId;
 module.exports = {
     createOrder: async(payload)=>{
         // payload.orderItems[0].productId
@@ -25,11 +26,12 @@ module.exports = {
         orderPayload.invoiceNo = `EK${ new Date().valueOf()}`;
 
         const order = await orderModel.create(orderPayload);
-        orderItems = orderItems.map(item =>{
+        orderItems = await Promise.all(orderItems.map(item =>{
             item.orderId = order._id;
             return item;
-        });
+        }));
         const createdItems = await orderItemModel.create(orderItems);
+        console.log(createdItems);
         return {
             order,
             createdItems,
@@ -47,7 +49,25 @@ module.exports = {
     } ,
     updateOrder: async (orderId,payload)=>{
         return await orderModel.findOneAndUpdate({_id:orderId},payload,{new:true});
+    },
+    getOrder: async (orderId)=>{
+       // return await orderModel.findOne({_id:orderId});
+       const orderDetails =  await orderModel.aggregate([
+           { $match:{
+               _id:ObjectId(orderId),
+           }},
+           {
+            $lookup:
+            {
+                from: "orderitems" ,
+                localField: "_id" ,
+                foreignField: "orderId" ,
+                as:  "orderItems"
+            }
+        }
+       ]);
+       //ternary operator....if /else er short cut version
+       return orderDetails.length>0 ? orderDetails[0] : {};
     }
-    
 }
     

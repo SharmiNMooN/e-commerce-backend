@@ -82,4 +82,23 @@ module.exports = {
             });
         }
     },
+    getOrder: async(req,res)=>{
+        try{
+            const orderId = req.params.id;
+            const order = await orderService.getOrder(orderId);
+            return res.status(200).send({
+            success: true,
+            message: "Order fatched successfully",
+            data: order
+        });
+        }catch(error){
+            console.log(error);
+            return res.status(500).send({
+                success: false,
+                message: "Internal sever error",
+                data: error
+            });
+        }
+
+    },
 }
