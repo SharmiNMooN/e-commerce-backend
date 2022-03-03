@@ -101,4 +101,29 @@ module.exports = {
         }
 
     },
+    removeOrder: async(req,res)=>{
+        try{
+            const orderId = req.params.id;
+            const orderDetails = await orderService.getOrder(orderId);
+            if(!orderDetails){
+            return res.status(400).send({
+                success:false,
+                 message: "order is not found"
+                });
+            }
+            await orderService.removeOrder(orderId);
+            return res.status(200).send({
+                success: true,
+                message: "order delete successfully",
+                });
+            
+        }catch(error){
+            console.log(error);
+            return res.status(500).send({
+                success: false,
+                message: "Internal sever error",
+                data: error
+            });
+        }
+    },
 }

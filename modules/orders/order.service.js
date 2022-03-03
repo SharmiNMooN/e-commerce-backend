@@ -67,7 +67,10 @@ module.exports = {
         }
        ]);
        //ternary operator....if /else er short cut version
-       return orderDetails.length>0 ? orderDetails[0] : {};
+       return orderDetails.length>0 ? orderDetails[0] : null;
+    },
+    removeOrder: async(orderId)=>{
+        return await orderModel.findOneAndRemove({_id:orderId});
     }
 }
     
