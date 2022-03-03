@@ -50,7 +50,7 @@ module.exports = {
                 success: true,
                 message: "Orders fetch are successfully",
                 data: orders
-            })
+            });
 
 
 
@@ -62,11 +62,24 @@ module.exports = {
             });
 
         }
-    }
-
-    
-
-
-
-
+    },
+    updateOrder: async(req,res)=>{
+        try{
+            const orderId = req.params.id;
+            const payload = req.body;
+            const updateOrder = await orderService.updateOrder(orderId,payload);
+            return res.status(200).send({
+            success: true,
+            message: "Order updated successfully",
+            data: updateOrder
+            });
+        }catch(error){
+            console.log(error);
+            return res.status(500).send({
+                success: false,
+                message: "Internal sever error",
+                data: error
+            });
+        }
+    },
 }

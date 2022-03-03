@@ -44,6 +44,10 @@ module.exports = {
         const orders = await orderModel.find(querySpec).skip(Number(skip)).limit(Number(limit));
 
         return orders;
-    } 
+    } ,
+    updateOrder: async (orderId,payload)=>{
+        return await orderModel.findOneAndUpdate({_id:orderId},payload,{new:true});
+    }
     
 }
+    
