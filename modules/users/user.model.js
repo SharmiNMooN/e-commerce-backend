@@ -13,8 +13,15 @@ const userSchema = new Schema({
          type: Schema.Types.String, 
          enum: ["active", "inactive", "blocked"],
          default: "active"
-    },    
+    },
     password: { type: Schema.Types.String, trim: true, required: true},
+    userType: { 
+        type: Schema.Types.String,
+        trim: true,
+        required: true,
+        enum: ["customer", "admin"],
+        default: "customer"
+    },
 
 }, {
     timestamps: true,versionKey: false,
